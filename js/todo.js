@@ -60,15 +60,18 @@ function fillTodoList(dataSnapshot){
  // Update tasks function
  function updateTodo(key){
   const newTodoName = prompt('Set the new name')
-  if(newTodoName != ''){
+
+  if(newTodoName == '' || newTodoName == null){
+    Alert ('Nothing to change')
+  }
+  
+  else{
     const data = {
       name: newTodoName
     }
-    
+
     dbRefUsers.child(firebase.auth().currentUser.uid).child(key).update(data).then(()=>{
       console.log();
     })
-  }else{
-    alert('Empty')
   }
  }
