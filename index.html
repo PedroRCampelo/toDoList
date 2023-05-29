@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDoList</title>
+  <link rel="shortcut icon" href="assets/todoListFavicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <div id="app">
+    <!-- Logo toDoList -->
+    <div class=" center">
+      <img src="assets/logo.png" alt="">
+    </div>
+
+    <!-- loading auth -->
+    <div id="loading">
+      <img src="assets/loading.gif" alt="loading">
+    </div>
+
+    <!-- unauthenticated users -->
+    <div id="auth" class="center">
+      <!-- form authentication -->
+      <form id="authForm">
+        <h3 id="authFormTitle">Sign in to your account </h3>
+
+        <label for="email">Email:</label>
+        <input type="email" placeholder="E-mail" id="email">
+
+        <label for="password">Password: </label>
+        <input type="password" placeholder="Password" id="password">
+
+        <button type="submit" id="submitAuthForm">Enter</button>
+      </form>
+
+      <!-- reset password -->
+      <p id="passwordReset">
+        Forgot password?
+        <button onclick="sendPasswordResetEmail()" class="alternative">Reset password</button>
+      </p>
+
+
+      <!-- registration of new accounts -->
+      <p id="register">
+        Create your account
+        <button onclick="toggleToRegister()" class="alternative">Create</button>
+      </p>
+
+
+      <!-- comeback to login -->
+      <p id="access" class="startHidden">
+        Already have access?
+        <button onclick="toggleToAccess()" class="alternative">Login</button>
+      </p>
+
+      <p>
+        Or access through other platforms: <br>
+        <img src="assets/google.png" alt="Auth with google" onclick="signInWithGoogle()">
+        <img src="assets/github.png" alt="Auth with gitHub" onclick="signInWithGithub()">
+      </p>
+    </div>
+
+    <!-- authenticated users -->
+    <div id="userContent" class="startHidden">
+      <hr>
+      <div id="userInfo" class="center">
+        <p>Authenticated user</p>
+        <img id="userImg">
+        <p id="userName"></p>
+        <p id="userEmail"></p>
+        <p id="emailVerified"></p>
+        <div>
+          <div id="sendEmailVerificationDiv">
+            <button class="alternative" onclick="sendEmailVerification()">Verify Email</button>
+          </div>
+        </div>
+        <button class="alternative" onclick="updateUserName()">Update username</button>
+        <button class="alternative" onclick="signOut()">LogOut</button>
+        <button class="danger" onclick="deleteUserAccount()">Delete Account</button>
+      </div>
+
+      <hr>
+
+      <!-- Show tasks  -->
+      <div id="todoList">
+        <h3 id="todoCount">Loading tasks...</h3>
+        <div class="center">
+          <label for="search">Search: </label>
+          <input type="text" placeholder="Search" id="search" autocomplete="off">
+        </div>
+
+        <ul id="ulTodoList"></ul>
+      </div>
+
+      <hr>
+
+      <!-- tasks form -->
+      <div class="center">
+        <form id="todoForm">
+          <h3 id="todoFormTitle">Add task:</h3>
+          <label for="name">Task: </label>
+          <input type="text" id="name" placeholder="Task">
+
+          <label for="img">Image: </label>
+          <input type="file" id="file">
+          <button type="submit" id="submitTodoForm">ADD</button>
+        </form>
+
+        <div id="cancelUpdateTodo" class="startHidden">
+          <button onclick="comfirmTodoUpdate()">Confirmar modificação</button>
+          <button class="alternative" onclick="resetTodoForm()">Cancelar modificação</button>
+        </div>
+
+        <div id="progressFeedback" class="startHidden">
+          <progress max="100" id="progress"></progress>
+          <button id="playPauseBtn" class="alternative">Pausar</button>
+          <button id="cancelBtn" class="danger">Cancelar</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-firestore.js"></script>
+
+  <!-- scripts -->
+  <script src="js/firebase.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/todo.js"></script>
+
+</body>
+
+</html>
